@@ -1,0 +1,32 @@
+version: '3.6'
+
+services:
+  development_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - PYCHARM_VERSION=2018.2.4
+      network: host
+    image: development_image:v0.1
+    container_name: development_container
+    volumes:
+      - /data:/data # data stored here
+      - ${WORKDIR}:/work # This is the working folder where we have out projects
+      - /tmp/.X11-unix:/tmp/.X11-unix # needed for X11
+      - ~/.Xauthority:/.Xauthority # needed for X11
+      - ${HOME}/.keras:/home/${USER}/.keras
+      - ${HOME}/.PyCharmCE2018.2:/home/${USER}/.PyCharmCE2018.2
+    ports:
+      - "8889:8889" # jupyter lab
+      - "6006:6006" # tensorboard
+      - "6007:6007" # tensorboard
+    environment:
+      - DISPLAY=$DISPLAY # needed for X11
+      - XAUTHORITY=/.Xauthority # needed for X11
+      - SHELL=/bin/bash #sets the active shell for JupyterLab
+    command:
+      - /bin/bash
+      - /start.sh
+    network_mode: host
+

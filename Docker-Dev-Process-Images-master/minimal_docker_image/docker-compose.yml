@@ -1,0 +1,9 @@
+version: '3.6'
+
+services:
+  minimal:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: minimal_image:v0.1
+    container_name: minimal_container

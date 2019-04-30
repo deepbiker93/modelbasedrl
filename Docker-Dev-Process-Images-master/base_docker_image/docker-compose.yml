@@ -1,0 +1,25 @@
+version: '3.6'
+
+services:
+  base_jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - USER=${USER}
+        - UID=${USER_UID}
+        - TINI_VERSION=v0.18.0
+      network: host
+    image: base_jupyter_image:v0.1
+    container_name: base_jupyter_container
+    volumes:
+      - ${WORKDIR}:/work
+      - /data:/data
+    ports:
+      - "8889:8889" # Jupyter port
+    command:
+        - /bin/bash
+        - start.sh
+#    stdin_open: true
+#    tty: true
+    network_mode: host

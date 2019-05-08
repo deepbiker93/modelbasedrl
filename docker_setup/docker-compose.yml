@@ -9,17 +9,26 @@ services:
         - USER=${USER}
         - UID=${USER_UID}
         - TINI_VERSION=v0.18.0
+        - PYCHARM_VERSION=2018.2.4
       network: host
-    image: base_jupyter_image:v0.1
-    container_name: base_jupyter_container
+    image: rl_development_image:v0.1
+    container_name: rl_development_container
     volumes:
-      - ${WORKDIR}:/work
-      - /data:/data
+      - /data:/data # data stored here
+      - ${WORKDIR}:/work # This is the working folder where we have out projects
+      - /tmp/.X11-unix:/tmp/.X11-unix # needed for X11
+      - ~/.Xauthority:/.Xauthority # needed for X11
+      - ${HOME}/.keras:/home/${USER}/.keras
+      - ${HOME}/.PyCharmCE2018.2:/home/${USER}/.PyCharmCE2018.2
     ports:
       - "8889:8889" # Jupyter port
+      - "6006:6006" # tensorboard
+      - "6007:6007" # tensorboard
+    environment:
+      - DISPLAY=$DISPLAY # needed for X11
+      - XAUTHORITY=/.Xauthority # needed for X11
+      - SHELL=/bin/bash #sets the active shell for JupyterLab
     command:
         - /bin/bash
         - start.sh
-#    stdin_open: true
-#    tty: true
     network_mode: host

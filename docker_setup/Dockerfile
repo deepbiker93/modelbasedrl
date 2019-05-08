@@ -3,6 +3,7 @@ MAINTAINER robertmoni
 
 USER root
 
+### Requirements###
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	python3.5 \
@@ -37,6 +38,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libtiff-dev \
     libjasper-dev \
     libboost-all-dev \
+	libsm6 \
+	libxrender-dev \
     nodejs \
     ffmpeg \
     rsync \
@@ -46,19 +49,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && \
    apt-get clean && \
    rm -rf /var/lib/apt/lists/*
-
+   
+   
+ADD requirements.txt requirements.txt
 RUN pip3 install --upgrade pip
-RUN pip3 install mpi4py pympler cma
-RUN pip3 install tensorflow-gpu==1.13.1 keras
+RUN pip3 install -r requirements.txt
 
-
-RUN pip3 install gym
-RUN pip3 install gym[box2d]
-RUN pip3 install gym[atari]
-
-RUN pip3 install setuptools
-RUN pip3 install wheel
-RUN pip3 install jupyterlab
 
 
 COPY jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
@@ -68,9 +64,6 @@ COPY jupyter_notebook_config.json /root/.jupyter/jupyter_notebook_config.json
 RUN echo "PermitRootLogin yes\nSubsystem sftp internal-sftp" > /etc/ssh/sshd_config
 RUN echo "root:init" | chpasswd
 
-RUN pip3 install --upgrade tornado==5.1.1
-RUN pip3 install matplotlib
-RUN pip3 install numpy==1.16.1 # 1.16.3 has a bug now, "Object arrays cannot be loaded when allow_pickle=False" is the symptom
 
 ### Args & Env ###
 
@@ -108,14 +101,26 @@ ADD start.sh /start.sh
 ADD jupyter_notebook_config.py ${NEW_HOME}/.jupyter/jupyter_notebook_config.py
 
 # fabians implementation
-WORKDIR /root
+#WORKDIR /root
 
-VOLUME /ffabi_shared_folder
+#VOLUME /ffabi_shared_folder
 
-CMD service ssh start && jupyter notebook --allow-root
+#CMD service ssh start && jupyter notebook --allow-root
 #fabians impl end
 
 
 ### Entrypoint ###
 
 ENTRYPOINT ["/tini", "--"]
+
+ARG PYCHARM_VERSION
+# Install PyCharm
+RUN curl -O https://download-cf.jetbrains.com/python/pycharm-community-${PYCHARM_VERSION}.tar.gz
+RUN tar xvzf pycharm-community-${PYCHARM_VERSION}.tar.gz
+
+# Add pycharm.sh to the PATH
+RUN echo "export PATH=$PATH:/opt/pycharm-community-${PYCHARM_VERSION}/bin" >> ${NEW_HOME}/.bashrc
+
+
+USER $USER
+WORKDIR /

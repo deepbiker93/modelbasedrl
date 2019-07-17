@@ -1,6 +1,6 @@
-FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
+FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
+LABEL maintainer="robertmoni"
 
-USER root
 
 ### Install basic packages & python related stuff ###
 
@@ -26,7 +26,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libjpeg-dev \
         libpng-dev \
         libtiff-dev \
-        libjasper-dev \
         libboost-all-dev \
         nodejs \
         ffmpeg \

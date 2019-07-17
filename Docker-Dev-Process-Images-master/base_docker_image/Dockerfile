@@ -1,4 +1,4 @@
-FROM minimal_image:v0.1
+FROM pia_min_image:v0.1
 
 USER root
 

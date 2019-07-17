@@ -1,9 +1,0 @@
-version: '3.3'
-
-services:
-  minimal:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: pia_min_image:v0.1
-    container_name: pia_min_container

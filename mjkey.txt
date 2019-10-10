@@ -1,0 +1,20 @@
+MuJoCo Pro Personal license activation key, number 68451, type 6.
+
+Issued to Robert Moni <robertmoni@tmit.bme.hu>.
+
+Expires May 19, 2020.
+
+This file activates MuJoCo Pro on a single computer with id:
+LINUX_T4TNUSGM57M1H50HMLA00906_SSZ52Y0M369LN4087
+
+Do not modify this file. Its entire content, including the
+plain text section, is used by the activation manager.
+
+a4de2f37b51782681fe13595da5c72b56246664bcd66b37656cf5ed13d1f8001
+9a3e2d3d4a937a2cf20900723e6d381298aeb7576fe1adab69c9aab96bedac87
+84fd95cfdde1f967c1c73da1039f74024cf4a34f8e8bcfeccd0134a7bd2b5043
+838c1c017d8923246e31484f9422451e8349e4ceeb7c379036d3d1e275cf49e5
+738fc0007200dbb5438139cb5412c46ed470d13a08e913fcf74614cff16e7854
+d81222dac03e1d0aae76f186ee8a6d92a1c1bfb900d3a70c768242a560cb0a2a
+c7921fb1d4692bc2527be16229007eb658e6dc7e5c0d26c1159fd5e7b9caeb43
+c66a46915d64f6a69beea2d823ca6dafe94caa1469b0a3428a85cfb42c13443c
